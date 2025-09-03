@@ -61,12 +61,14 @@
         echo "<br>";
         $b = " 5a versión de PHP";
         echo "Variable de \$b: $b<br>";
-        @$c = $b*10;
+        $c = (integer) $b*10;
         echo "Variable de \$c: $c<br>";
         $a .= $b;
         echo "Variable de \$a: $a<br>";
-        @$b *= $c;
+        $b = (integer)$b;
+        $b *= $c;
         echo "Variable de \$b: $b<br>";
+        $b = " 5a versión de PHP";
         $z[0] = "MySQL";
         echo "Variable de \$z[]: ";
         print_r($z);
@@ -86,17 +88,35 @@
         echo "<br>";
         $b = " 5a versión de PHP";
         echo "Variable de \$b: " . $GLOBALS['b'] . "<br>";
-        @$c = $b*10;
+        $c = (integer)$b*10;
         echo "Variable de \$c: " . $GLOBALS['c'] . "<br>";
         $a .= $b;
         echo "Variable de \$a: " . $GLOBALS['a'] . "<br>";
-        @$b *= $c;
+        $b = (integer)$b;
+        $b *= $c;
         echo "Variable de \$b: " . $GLOBALS['b'] . "<br>";
+        $b = " 5a versión de PHP";
         $z[0] = "MySQL";
         echo "Variable de \$z[]: ";
         print_r($GLOBALS['z']);
         echo "<br>";
         unset ($a, $b, $c, $z)
+    ?>
+    <br>
+    <h2>Pregunta 5. Dar el valor de las variables $a, $b, $c al final del siguiente script:</h2>
+    <?php
+        echo "\$a = \"7 personas\"<br>";
+        echo "\$b = (integer) \$a <br>";
+        echo "\$a = \"9E3\"<br>";
+        echo "\$c = (double) \$a<br><br>";
+        $a = "7 personas";
+        $b = (integer) $a;
+        $a = "9E3";
+        $c = (double) $a;
+        echo "Variable \$a: $a <br>";
+        echo "Variable \$b: $b <br>";
+        echo "Variable \$c: $c <br>";
+        unset($a, $b, $c)
     ?>
 
 
