@@ -118,6 +118,48 @@
         echo "Variable \$c: $c <br>";
         unset($a, $b, $c)
     ?>
+    <br>
+    <h2>Pregunta 6. Dar y comprobar el valor booleano de las variables 
+        $a, $b, $c, $d, $e, y $f y muéstralas usando la función 
+        var_dump (datos)</h2>
+    <?php
+        echo "\$a = \"0\"<br>";
+        echo "\$b = \"TRUE\"<br>";
+        echo "\$c = \"FALSE\"<br>";
+        echo "\$d = (\$a OR \$b)<br>";
+        echo "\$e = (\$a AMD \$c)<br>";
+        echo "\$f = (\$a XOR \$b)<br>";
+        $a = "0";
+        $b = "TRUE";
+        $c = FALSE;
+        $d = ($a OR $b);
+        $e = ($a AND $b);
+        $f = ($a XOR $b);
+        echo "<br>";
+        var_dump($a);
+        echo "<br>";
+        var_dump($b);
+        echo "<br>";
+        var_dump($c);
+        echo "<br>";
+        var_dump($d);
+        echo "<br>";
+        var_dump($e);
+        echo "<br>";
+        var_dump($f);
+        
+        echo "<h3>Después investiga una función de PHP que permita transformar el valor
+                  booleano de \$c y \$e en uno que se pueda mostrar con un echo</h3>";
+        echo " var_export() devuelve datos estructurados sobre la variable dada.
+                Es el mismo principio que var_dump() pero con una excepción: el resultado
+                devuelto es código PHP válido. <br> Usa dos parámteros: value (la variable 
+                que se desea exportar) y return (si se establece en true, var_export() devolverá
+                la representación de la variable en lugar de mostrarla.";
+                  echo "<br>Con var_export(): <br>";
+        echo "c = " . var_export($c, true) . "<br>";
+        echo "e = " . var_export($e, true) . "<br>";
+        unset($a, $b, $c, $d, $e, $f);
+    ?>
 
 
 </body>
