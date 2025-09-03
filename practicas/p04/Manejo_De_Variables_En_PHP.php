@@ -4,7 +4,29 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title> Práctica 4 </title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f4f4f9; 
 
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            background-color: #dfe6e9;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        h2 {
+            color: #0984e3;
+            margin-top: 20px;
+        }
+        p {
+            line-height: 1.5;
+        }
+    </style>
 </head>
 <body>
     <h1>Manejo de variables en PHP</h1>
@@ -160,7 +182,18 @@
         echo "e = " . var_export($e, true) . "<br>";
         unset($a, $b, $c, $d, $e, $f);
     ?>
-
-
+    <h2>Pregunta 7. Usando la variable predefinida $_SERVER, determina lo siguiente:</h2>
+    <h3>a. La versión de Apache y PHP</h3>
+    <?php
+        echo $_SERVER['SERVER_SOFTWARE'];
+    ?>
+    <h3>b. El nombre del sistema operativo (servidor)</h3>
+    <?php
+        echo PHP_OS;
+    ?>
+    <h3>El idioma del navegador (cliente)</h3>
+    <?php
+        echo $_SERVER["HTTP_ACCEPT_LANGUAGE"];
+    ?>
 </body>
 </html>
