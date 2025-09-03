@@ -44,9 +44,35 @@
         echo "Variable \$b:  $b <br>";
         echo "Variable \$c:  $c <br>";
         echo "<h3>d. Describir que sucedió en el segundo bloque de asignaciones</h3>";
-        echo "En la segunda asignación la variable b y c obtuvieron el contenido actual de la variable a, el cual era \"PHP server\" en el momento de su obtención."
+        echo "En la segunda asignación la variable b y c obtuvieron el contenido actual de la variable a, el cual era \"PHP server\" en el momento de su obtención.";
+        unset ($a, $b, $c)
     ?>
+    <br>
+    <h2>Pregunta 3. Muestra el contenido de cada variable inmediatamente 
+        después de cada asignación, verificar la evolución del tipo de estas 
+        variables (imprime todos los componentes de los arreglos):
+    </h2>
+    <?php
+        $a = "PHP5";
+        echo "Variable de \$a: $a<br>";
+        $z[] = &$a;
+        echo "Variable de \$z[]: ";
+        print_r($z);
+        echo "<br>";
+        $b = " 5a versión de PHP";
+        echo "Variable de \$b: $b<br>";
+        @$c = $b*10;
+        echo "Variable de \$c: $c<br>";
+        $a .= $b;
+        echo "Variable de \$a: $a<br>";
+        @$b *= $c;
+        echo "Variable de \$b: $b<br>";
+        $z[0] = "MySQL";
+        echo "Variable de \$z[]: ";
+        print_r($z);
+        echo "<br>"
 
+    ?>
 
 </body>
 </html>
