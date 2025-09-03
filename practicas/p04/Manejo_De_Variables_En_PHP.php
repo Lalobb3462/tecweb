@@ -70,9 +70,35 @@
         $z[0] = "MySQL";
         echo "Variable de \$z[]: ";
         print_r($z);
-        echo "<br>"
-
+        echo "<br>";
+        unset ($a, $b, $c, $z)
     ?>
+    <br>
+    <h2>Pregunta 4. Lee y muestra los valores de las variables del ejercicio
+        anterior, pero ahora con la ayuda de la matriz $GLOBALS o del modificador global de PHP
+    </h2>
+    <?php
+        $a = "PHP5";
+        echo "Variable de \$a: " . $GLOBALS['a'] . "<br>";
+        $z[] = &$a;
+        echo "Variable de \$z[]: ";
+        print_r($GLOBALS['z']);
+        echo "<br>";
+        $b = " 5a versión de PHP";
+        echo "Variable de \$b: " . $GLOBALS['b'] . "<br>";
+        @$c = $b*10;
+        echo "Variable de \$c: " . $GLOBALS['c'] . "<br>";
+        $a .= $b;
+        echo "Variable de \$a: " . $GLOBALS['a'] . "<br>";
+        @$b *= $c;
+        echo "Variable de \$b: " . $GLOBALS['b'] . "<br>";
+        $z[0] = "MySQL";
+        echo "Variable de \$z[]: ";
+        print_r($GLOBALS['z']);
+        echo "<br>";
+        unset ($a, $b, $c, $z)
+    ?>
+
 
 </body>
 </html>
