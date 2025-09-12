@@ -13,7 +13,15 @@
           border: 2px solid black;
           padding: 5px;
           max-width: 444px;
+          background-color: white;
         }
+        @media (max-width: 768px) {
+          div {
+            width: 60%;
+            margin: 30px auto;
+          }
+        }
+        /*Use una media querie para que no se deforme con el css que le puse*/
         h2{
           margin-top: 4px;
           text-align: center;
@@ -24,6 +32,20 @@
         p{
           margin:0px;
         }
+        fieldset{
+          margin:10px 0;
+          padding:2px;
+        }
+        p input{
+          border-radius: 10px;
+          
+        }
+        body{
+          background-color: aqua;
+        }
+        textarea{
+          width:95%;
+        }
     </style>
   </head>
 
@@ -33,8 +55,9 @@
 
     <p>¿Quieres cambiar tus viejos tenis por un par personalizado de <i>Tenis Mike&#174;? </i>Justifica el por qué tus tenis se <em>tienen que</em> ir y tú puedes ser uno de los diez afortunados ganadores.</p>
     <br>
-    <p>Información del Participante</p>
     <form action="http://52.43.117.247/neo/classroom/tw/concurso.php" method="post">
+      <fieldset>
+        <legend>Información del Participante</legend>
       <ul>
           <li>
             <label for="firstlast">Nombre:</label>
@@ -54,40 +77,47 @@
           </li>
 
         </ul>
+      </fieldset>
+      <h3>Diseña tus Mike personalizados:</h3>
+      <fieldset>
+        <legend>Diseño personalizado del Tenis</legend>
 
-      <b>Diseña tus Mike personalizados:</b>
-      <p>Diseño personalizado del Tenis</p>
-
-      <p>Color <em>(escoge uno)</em>:</p>
-        <ul>
-          <li><input type="radio" name="color" value="red">Rojo</li>
-          <li><input type="radio" name="color" value="blue">Azul</li>
-          <li><input type="radio" name="color" value="black" checked>Negro</li>
-          <li><input type="radio" name="color" value="silver">Plateado</li>
-        </ul>
-
-      <p>Características <em>(escoge tantas como quieras)</em>:</p>
-        <ul>
-          <li><input type="checkbox" name="features[]" value="cordon_brillante">Cordones brillantes</li>
-          <li><input type="checkbox" name="features[]" value="logo_metálico" checked>Logo Metálico</li>
-          <li><input type="checkbox" name="features[]" value="suela_luminosa">Suela luminosa</li>
-          <li><input type="checkbox" name="features[]" value="wifi_integrado">WiFi Integrado</li>
-        </ul>
-
-      <p>Talla</p>
-      <label for="size">Las medidas reflejan el estándar masculino:</label>
-      <select name="size" id="talla" size="1">
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-      </select>
+        <fieldset>
+        <legend>Color <em>(escoge uno)</em>:</legend>
+          <ul>
+            <li><input type="radio" name="color" value="red">Rojo</li>
+            <li><input type="radio" name="color" value="blue">Azul</li>
+            <li><input type="radio" name="color" value="black" checked>Negro</li>
+            <li><input type="radio" name="color" value="silver">Plateado</li>
+          </ul>
+        </fieldset> 
+        <fieldset>
+        <legend>Características <em>(escoge tantas como quieras)</em>:</legend>
+          <ul>
+            <li><input type="checkbox" name="features[]" value="cordon_brillante">Cordones brillantes</li>
+            <li><input type="checkbox" name="features[]" value="logo_metálico" checked>Logo Metálico</li>
+            <li><input type="checkbox" name="features[]" value="suela_luminosa">Suela luminosa</li>
+            <li><input type="checkbox" name="features[]" value="wifi_integrado">WiFi Integrado</li>
+          </ul>
+        </fieldset>
+        <fieldset>
+          <legend>Talla</legend>
+          <label for="size">Las medidas reflejan el estándar masculino:</label>
+          <select name="size" id="talla" size="1">
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+        </select>
+        </fieldset>
+      </fieldset>
       <p><input type="submit" value="¡Chidos Mis Tenis!"> <input type="reset" value="Limpiar"></p>
+      
       </form>
     </div>
   </body>
