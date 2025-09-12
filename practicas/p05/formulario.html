@@ -29,36 +29,49 @@
     <p>¿Quieres cambiar tus viejos tenis por un par personalizado de <i>Tenis Mike&#174;? </i>Justifica el por qué tus tenis se <em>tienen que</em> ir y tú puedes ser uno de los diez afortunados ganadores.</p>
 
     <p>Información del Participante</p>
-
-    <ul>
-    <li>Nombre:</li>
-    <li>Dirección de E-mail:</li>
-    <li>Número Telefónico:</li>
-    <li>Mis tenis son tan feos porque...</li>
-    </ul>
-
-    <h3>Diseña tus Mike personalizados:</h3>
-
-    <p>Diseño personalizado del Tenis</p>
-
-    <p>Color <em>(escoge uno)</em>:</p>
+    <form action="http://localhost/mike/concurso.php" method="post">
       <ul>
-      <li>Rojo</li>
-      <li>Azul</li>
-      <li>Negro</li>
-      <li>Plateado</li>
-      </ul>
+          <li>
+            <label for="firstlast">Nombre:</label>
+            <input type="text" name="name" id="firstlast">
+          </li>
+          <li>
+            <label for="email">Dirección de E-mail:</label>
+            <input type="email" name="email" id="email">
+          </li>
+          <li>
+            <label for="phone">Número telefónico:</label>
+            <input type="tel" name="phone" id="phone">
+          </li>
+          <li>
+            <label for="descripcion">Mis tenis so tan feos porque...</label><br>
+            <textarea name="story" rows="5" cols="50" maxlength="300" placeholder="No más de 300 carácteres de longitud."></textarea>
+          </li>
 
-    <p>Características <em>(escoge tantas como quieras)</em>:</p>
-      <ul>
-      <li>Cordones brillantes</li>
-      <li>Logo metálico</li>
-      <li>Suela luminosa</li>
-      <li>WiFi integrado</li>
-      </ul>
+        </ul>
 
-    <p>Talla</p>
-    <p>Las medidas reflejan el estándar masculino:</p>
+      <b>Diseña tus Mike personalizados:</b>
+      <p>Diseño personalizado del Tenis</p>
+
+      <p>Color <em>(escoge uno)</em>:</p>
+        <ul>
+        <li>Rojo</li>
+        <li>Azul</li>
+        <li>Negro</li>
+        <li>Plateado</li>
+        </ul>
+
+      <p>Características <em>(escoge tantas como quieras)</em>:</p>
+        <ul>
+        <li>Cordones brillantes</li>
+        <li>Logo metálico</li>
+        <li>Suela luminosa</li>
+        <li>WiFi integrado</li>
+        </ul>
+
+      <p>Talla</p>
+      <p>Las medidas reflejan el estándar masculino:</p>
+      </form>
     </div>
   </body>
 </html>
