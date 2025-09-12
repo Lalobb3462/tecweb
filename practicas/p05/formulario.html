@@ -13,7 +13,6 @@
           border: 2px solid black;
           padding: 5px;
           max-width: 444px;
-          
         }
         h2{
           margin-top: 4px;
@@ -21,6 +20,9 @@
         }
         input{
           margin: 2px auto;
+        }
+        p{
+          margin:0px;
         }
     </style>
   </head>
@@ -30,7 +32,7 @@
     <h2>Registro al Concurso &ldquo;Chidos mis Tenis&rdquo;</h2>
 
     <p>¿Quieres cambiar tus viejos tenis por un par personalizado de <i>Tenis Mike&#174;? </i>Justifica el por qué tus tenis se <em>tienen que</em> ir y tú puedes ser uno de los diez afortunados ganadores.</p>
-
+    <br>
     <p>Información del Participante</p>
     <form action="http://52.43.117.247/neo/classroom/tw/concurso.php" method="post">
       <ul>
@@ -73,7 +75,18 @@
         </ul>
 
       <p>Talla</p>
-      <p>Las medidas reflejan el estándar masculino:</p>
+      <label for="size">Las medidas reflejan el estándar masculino:</label>
+      <select name="size" id="talla" size="1">
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+      </select>
       <p><input type="submit" value="¡Chidos Mis Tenis!"> <input type="reset" value="Limpiar"></p>
       </form>
     </div>
