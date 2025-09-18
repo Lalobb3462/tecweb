@@ -24,5 +24,36 @@
         }
     }
     ?>
+
+    <?php
+    function impar_par_impar()
+    {
+        $matriz=[];
+        $iteraciones_totales = 0;
+        $encontrado=false;
+
+        while($encontrado==false){
+            $fila=[];
+            for($j=0;$j<3;$j++){
+                $fila[$j]= mt_rand(1,999);
+            }
+            $matriz[$iteraciones_totales]=$fila;
+            $iteraciones_totales++;
+
+            if($fila[0] % 2 != 0 && $fila[1] % 2 == 0 && $fila[2] % 2 != 0){
+                $encontrado=true;
+            }
+        }
+        echo "Matriz generada: <br>"; 
+        foreach($matriz as $fila){
+            print_r($fila);
+            echo "<br>";
+        }
+        
+        $total_numeros= $iteraciones_totales * 3;
+        echo "<br>";
+        echo "$total_numeros números obtenidos en $iteraciones_totales iteraciones.";
+    }
+    ?>
 </body>
 </html>

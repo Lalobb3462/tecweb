@@ -14,6 +14,14 @@
     multiplo5_7();
     ?>
 
+    <h2>Ejercicio 2 </h2>
+    <p>Crea un programa para la generación repetitiva de 3 números 
+    aleatorios hasta obtener una secuencia compuesta por: impar, par, impar. </p>
+
+    <?php
+        impar_par_impar();
+    ?>
+
 
     <h2>Ejemplo de POST</h2>
     <form action="http://localhost/tecweb/practicas/p06/index.php" method="post">
@@ -30,5 +38,7 @@
             echo $_POST["email"];
         }
     ?>
+
+
 </body>
 </html>
