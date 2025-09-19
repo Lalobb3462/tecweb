@@ -55,5 +55,47 @@
         echo "$total_numeros números obtenidos en $iteraciones_totales iteraciones.";
     }
     ?>
+
+    <?php
+    function entero_multiplo_while()
+    {
+        if(isset($_GET['multiplo']))
+        {
+            $multiplo = $_GET['multiplo'];
+            $hallado = false;
+            while($hallado == false)
+            {
+                $entero = mt_rand(1,100);
+                echo "El número aleatorio es $entero. <br>";
+                if($entero % $multiplo == 0)
+                {
+                    $hallado = true;
+                    echo "El número $entero es multiplo de $multiplo. <br>";
+                }
+            }
+        }
+    }
+    function entero_multiplo_DoWhile()
+    {
+        if(isset($_GET['multiplo']))
+        {
+            $multiplo = $_GET['multiplo'];
+            $hallado = false;
+            do{
+                $entero = mt_rand(1,100);
+                echo "El número aleatorio es $entero. <br>";
+                if($entero % $multiplo == 0)
+                {
+                    $hallado = true;
+                    echo "El número $entero es multiplo de $multiplo. <br>";
+                }
+            }while($hallado == false);
+        }
+    }
+    ?>
+
+    <?php
+        
+    ?>
 </body>
 </html>

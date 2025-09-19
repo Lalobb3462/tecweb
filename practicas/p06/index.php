@@ -10,7 +10,10 @@
     <p>Escribir programa para comprobar si un número es un múltiplo de 5 y 7</p>
 
     <?php
-    include ("src/funciones.php");
+        include "src/funciones.php";
+    ?>
+
+    <?php
     multiplo5_7();
     ?>
 
@@ -22,6 +25,26 @@
         impar_par_impar();
     ?>
 
+    <h3>Ejercicio 3</h3>
+    <p>Utiliza un ciclo while para encontrar el primer número entero obtenido aleatoriamente, pero que además sea múltiplo de un número dado.</p>
+    <ul>
+        <li>Crear una variante de este script utilizando el ciclo do-while.</li>
+        <li>El número dado se debe obtener vía GET.</li>
+    </ul>
+    <?php
+        echo "<b>Con ciclo While</b><br>";
+        entero_multiplo_while();
+        echo "<br>" 
+    ?>
+    <?php
+        echo "<b>Con ciclo DoWhile</b><br>";
+        entero_multiplo_DoWhile();
+        echo "<br>"
+    ?>
+
+    
+
+    
 
     <h2>Ejemplo de POST</h2>
     <form action="http://localhost/tecweb/practicas/p06/index.php" method="post">
