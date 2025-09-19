@@ -95,7 +95,24 @@
     ?>
 
     <?php
-        
+    function ascii_a_letras()
+    {
+        $arreglo_indices=[];
+        for($i=97; $i<=122; $i++)
+        {
+            $arreglo_indices[$i]=chr($i);
+        } 
+
+        echo "<table border='1' cellpadding='3' > <tr><th> Tabla ASCII </th><th>Letra</th></tr>";
+        foreach ($arreglo_indices as $key => $value)
+        {
+            echo "<tr><td>" . $key . "</td>";
+            echo "<td>" . $value . "</td></tr>";
+        }
+        echo "</table>";
+    }
     ?>
+
+    
 </body>
 </html>
