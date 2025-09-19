@@ -54,7 +54,30 @@
         ascii_a_letras();
     ?>
 
+    <h3>Ejercicio 5</h3>
+    <p>Usar las variables $edad y $sexo en una instrucción if para identificar una persona de
+    sexo “femenino”, cuya edad oscile entre los 18 y 35 años y mostrar un mensaje de
+    bienvenida apropiado. Por ejemplo:</p><br>
+    <i style="margin-left:40px">Bienvenida, usted está en el rango de edad permitido.</i><br>
+    <p>En caso contrario, deberá devolverse otro mensaje indicando el error.</p>
+    <ul>
+        <li>Los valores para $edad y $sexo se deben obtener por medio de un formulario en HTML.</li>
+        <li>Utilizar el la Variable Superglobal $_POST (revisar documentación).</li>
+    </ul>
+
     
+    <h4>Formulario de registro</h4>
+        <form action="src/xhtml.php" method="post">
+        <label for="edad">Edad:</label>
+        <input type="number" name="edad" id="edad" required>
+        <br><br>
+        <label>Sexo:</label>
+        <input type="radio" name="sexo" value="femenino" required> Femenino
+        <input type="radio" name="sexo" value="masculino" required> Masculino<br><br>
+
+        <button type="submit">Enviar</button>
+    </form>
+
 
     <h2>Ejemplo de POST</h2>
     <form action="http://localhost/tecweb/practicas/p06/index.php" method="post">
