@@ -5,6 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Funciones</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 20px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        h2, h3, h4 {
+            text-align: center;
+            color: #2c3e50;
+        }
+    </style>
 </head>
 <body>
     <?php
@@ -165,7 +179,7 @@
                 "Auto" => ["marca" => "MAZDA", "modelo" => 2018, "tipo" => "sedan"],
                 "Propietario" => ["nombre" => "Verónica Pérez", "ciudad" => "San Andrés, Pue.", "direccion" => "Calle 18 #50"]
             ],
-            "EFG2345" => 
+            "DOP2845" => 
             [
                 "Auto" => ["marca" => "NISSAN", "modelo" => 2022, "tipo" => "hatchback"],
                 "Propietario" => ["nombre" => "Jorge Ramírez", "ciudad" => "Puebla, Pue.", "direccion" => "Av. Reforma 78"]
