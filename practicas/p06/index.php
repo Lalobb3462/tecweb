@@ -78,23 +78,34 @@
         <button type="submit">Enviar</button>
     </form>
 
+    <h3>Ejercicio 6</h3>
+    <h4>Consultar Información de Autos</h4>
 
-    <h2>Ejemplo de POST</h2>
-    <form action="http://localhost/tecweb/practicas/p06/index.php" method="post">
-        Name: <input type="text" name="name"><br>
-        E-mail: <input type="text" name="email"><br>
-        <input type="submit">
+    <form action="http://localhost/tecweb/practicas/p06/index.php" method="POST">
+            <label for="matricula">Matrícula del vehículo:</label>
+            <input type="text" id="matricula" name="matricula" required>
+            <button type="submit">Consultar</button>
     </form>
     <br>
+    <form action="http://localhost/tecweb/practicas/p06/index.php" method="POST">
+        <button type="submit" name="todos_los_vehiculos">Mostrar vehículos registrados</button>
+    </form>
+
     <?php
-        if(isset($_POST["name"]) && isset($_POST["email"]))
+        if ($_SERVER["REQUEST_METHOD"] == "POST") 
         {
-            echo $_POST["name"];
-            echo '<br>';
-            echo $_POST["email"];
+            if (isset($_POST["matricula"])) 
+                {
+                    $matricula = $_POST["matricula"];
+                    mostrar_auto($matricula);
+                } 
+                elseif (isset($_POST["todos_los_vehiculos"])) 
+                {
+                    mostrar_todos_los_vehiculos();
+                }
         }
     ?>
 
-
+    
 </body>
 </html>
