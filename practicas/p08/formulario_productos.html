@@ -27,16 +27,16 @@
 </head>
 <body>
     <h1>Registro de nuevos productos en el inventario</h1>
-    <form id="formularioProductos" action="http://localhost/tecweb/practicas/p08/concurso.php" method="post">
+    <form id="formularioProductos" action="http://localhost/tecweb/practicas/p08/set_producto_v2.php" method="post">
         <fieldset>
             <h1>Ingresa la información del producto:</h1>
-            <label for="nombre">Nombre: </label> <input type="text" name="nombre" id="nombre">
-            <label for="marca">Marca: </label> <input type="text" name="marca" id="marca">
-            <label for="modelo">Modelo: </label> <input type="text" name="modelo" id="modelo">
-            <label for="precio">Precio: </label> <input type="number" name="precio" id="precio">
-            <label for="detalles">Detalles: </label> <textarea name="detalles" rows="5"  maxlength="300"></textarea>
-            <label for="unidades">Unidades: </label> <input type="number" name="unidades" id="unidades">
-            <label for="imagen">URL de la imagen: </label> <input type="text" name="imagen" id="imagen">
+            <label for="nombre">Nombre: </label> <input type="text" name="nombre" id="nombre" requiered>
+            <label for="marca">Marca: </label> <input type="text" name="marca" id="marca" requiered>
+            <label for="modelo">Modelo: </label> <input type="text" name="modelo" id="modelo" requiered>
+            <label for="precio">Precio: </label> <input type="number" name="precio" id="precio" step="0.01" min="0" placeholder="0.00" requiered>
+            <label for="detalles">Detalles: </label> <textarea name="detalles" rows="5"  maxlength="300" requieres></textarea>
+            <label for="unidades">Unidades: </label> <input type="number" name="unidades" id="unidades" requiered>
+            <label for="imagen">URL de la imagen: </label> <input type="text" name="imagen" id="imagen" requiered>
         </fieldset>
         <input type="submit" value="Registrar Producto">
         <input type="reset" value="Limpiar Formulario">
