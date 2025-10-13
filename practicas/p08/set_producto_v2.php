@@ -5,7 +5,7 @@ $modelo = $_POST['modelo'] ?? '';
 $precio = $_POST['precio'] ?? 0;
 $detalles = $_POST['detalles'] ?? '';
 $unidades = $_POST['unidades'] ?? 0;
-$imagen = $_POST['imagen'] ?? '';
+$imagen = $_POST['imagen'] ?? 'img/vacio.png';
 
 @$link = new mysqli('localhost', 'root', 'Youtube1', 'marketzone');	
 
