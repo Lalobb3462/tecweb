@@ -26,28 +26,54 @@
     </style>
 </head>
 <body>
+
+<?php
+$producto = null;
+
+
+if (isset($_GET['id'])) {
+    @$link = new mysqli('localhost', 'root', 'Youtube1', 'marketzone');
+
+    if (!$link->connect_errno) {
+        $id = intval($_GET['id']);
+        $query = "SELECT * FROM productos WHERE id = $id";
+
+
+        if ($result = $link->query($query)) {
+            $producto = $result->fetch_assoc();
+            $result->free();
+        }
+
+        $link->close();
+    }
+}
+?>    
+
     <h1>Registro de nuevos productos en el inventario</h1>
     <form id="formularioProductos" action="http://localhost/tecweb/practicas/p08/set_producto_v2.php" method="post" onsubmit="return validarFormulario()">
         <fieldset>
             <h1>Ingresa la información del producto:</h1>
-            <label for="nombre">Nombre: </label> <input type="text" name="nombre" id="nombre">
+            <input type="hidden" name="id" value="<?= isset($producto['id']) ? $producto['id'] : '' ?>">
+
+            <label for="nombre">Nombre: </label> <input type="text" name="nombre" id="nombre" value="<?= isset($producto['nombre']) ? $producto['nombre'] : '' ?>">
             <label for="marca">Marca: </label> 
+            <?php var_dump($producto['marca']); ?>
             <select name="marca" id="marca">
                 <option value="">Selecciona una marca de electrónicos</option>
-                <option value="Samsung">Samsung</option>
-                <option value="HP">HP</option>
-                <option value="Asus">Asus</option>
-                <option value="Hisense">Hisense</option>
-                <option value="Sony">Sony</option>
-                <option value="Xbox">Xbox</option>
-                <option value="Apple">Apple</option>
-                <option value="Logitech">Logitech</option>
+                <option value="Samsung" <?= isset($producto['marca']) && $producto['marca'] == 'Samsung' ? 'selected' : '' ?> >Samsung</option>
+                <option value="HP" <?= isset($producto['marca']) && $producto['marca'] == 'HP' ? 'selected' : '' ?>>HP</option>
+                <option value="Asus" <?= isset($producto['marca']) && $producto['marca'] == 'Asus' ? 'selected' : '' ?> >Asus</option>
+                <option value="Hisense" <?= isset($producto['marca']) && $producto['marca'] == 'Hisense' ? 'selected' : '' ?> >Hisense</option>
+                <option value="Sony" <?= isset($producto['marca']) && $producto['marca'] == 'Sony' ? 'selected' : '' ?> >Sony</option>
+                <option value="Xbox" <?= isset($producto['marca']) && $producto['marca'] == 'Xbox' ? 'selected' : '' ?> >Xbox</option>
+                <option value="Apple" <?= isset($producto['marca']) && $producto['marca'] == 'Apple' ? 'selected' : '' ?> >Apple</option>
+                <option value="Logitech" <?= isset($producto['marca']) && $producto['marca'] == 'Logitech' ? 'selected' : '' ?> >Logitech</option>
             </select><br></br>
-            <label for="modelo">Modelo: </label> <input type="text" name="modelo" id="modelo">
-            <label for="precio">Precio: </label> <input type="number" name="precio" id="precio" placeholder="0.00" step="0.01">
-            <label for="detalles">Detalles: </label> <textarea name="detalles" rows="5" id="detalles"></textarea>
-            <label for="unidades">Unidades: </label> <input type="number" name="unidades" id="unidades" placeholder="0">
-            <label for="imagen">URL de la imagen: (opcional)</label> <input type="text" name="imagen" id="imagen" placeholder="Ruta de la imagen">
+            <label for="modelo">Modelo: </label> <input type="text" name="modelo" id="modelo" value="<?= isset($producto['modelo']) ? $producto['modelo'] : '' ?>">
+            <label for="precio">Precio: </label> <input type="number" name="precio" id="precio" placeholder="0.00" step="0.01" value="<?= isset($producto['precio']) ? $producto['precio'] : '' ?>">
+            <label for="detalles">Detalles: </label> <textarea name="detalles" rows="5" id="detalles" ><?= isset($producto['detalles']) ? $producto['detalles'] : '' ?></textarea>
+            <label for="unidades">Unidades: </label> <input type="number" name="unidades" id="unidades" placeholder="0" value="<?= isset($producto['unidades']) ? $producto['unidades'] : '' ?>" >
+            <label for="imagen">URL de la imagen: (opcional)</label> <input type="text" name="imagen" id="imagen" placeholder="Ruta de la imagen" value="<?= isset($producto['imagen']) ? $producto['imagen'] : '' ?>">
         </fieldset>
         <input type="submit" value="Registrar Producto">
         <input type="reset" value="Limpiar Formulario">

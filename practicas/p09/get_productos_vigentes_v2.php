@@ -18,6 +18,11 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>Producto</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script>
+			function show(id) {
+				window.location.href = "formulario_productos_v2.php?id=" + id;
+			}
+		</script>
 	</head>
 	<body>
 		<h3>Productos vigentes del inventario</h3>
@@ -35,6 +40,7 @@
 					<th scope="col">Unidades</th>
 					<th scope="col">Detalles</th>
 					<th scope="col">Imagen</th>
+					<th scope="col">Modificar</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -48,6 +54,7 @@
 						<td><?= $row['unidades'] ?></td>
 						<td><?= utf8_encode($row['detalles']) ?></td>
 						<td><img src=<?= $row['imagen'] ?> ></td>
+						<td><input type="button" value="submit" onclick="show(<?= $row['id']?>)"></td>
 					</tr>
                     <?php endwhile; ?>
 				</tbody>
