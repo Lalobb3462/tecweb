@@ -47,10 +47,11 @@ if (isset($_GET['id'])) {
         $link->close();
     }
 }
+
 ?>    
 
     <h1>Registro de nuevos productos en el inventario</h1>
-    <form id="formularioProductos" action="http://localhost/tecweb/practicas/p08/set_producto_v2.php" method="post" onsubmit="return validarFormulario()">
+    <form id="formularioProductos" action="http://localhost/tecweb/practicas/p09/update_producto.php" method="post" onsubmit="return validarFormulario()">
         <fieldset>
             <h1>Ingresa la información del producto:</h1>
             <input type="hidden" name="id" value="<?= isset($producto['id']) ? $producto['id'] : '' ?>">
@@ -77,6 +78,7 @@ if (isset($_GET['id'])) {
         <input type="submit" value="Registrar Producto">
         <input type="reset" value="Limpiar Formulario">
     </form>
+
 
     <script>
         function esAlfanumerico(str) {

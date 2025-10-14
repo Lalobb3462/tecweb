@@ -27,6 +27,8 @@ $sql = "UPDATE productos SET
 
 if(mysqli_query($link, $sql)){
     echo "Producto actualizado correctamente.";
+    echo "<br><a href='get_productos_xhtml_v2.php'>Ver productos por cantidad máxima</a>";
+    echo "<br><a href='get_productos_vigentes_v2.php'>Ver productos vigentes</a>";
 } else {
     echo "ERROR: No se ejecutó la consulta. " . mysqli_error($link);
 }
