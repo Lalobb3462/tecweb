@@ -57,7 +57,6 @@ if (isset($_GET['id'])) {
 
             <label for="nombre">Nombre: </label> <input type="text" name="nombre" id="nombre" value="<?= isset($producto['nombre']) ? $producto['nombre'] : '' ?>">
             <label for="marca">Marca: </label> 
-            <?php var_dump($producto['marca']); ?>
             <select name="marca" id="marca">
                 <option value="">Selecciona una marca de electrónicos</option>
                 <option value="Samsung" <?= isset($producto['marca']) && $producto['marca'] == 'Samsung' ? 'selected' : '' ?> >Samsung</option>
