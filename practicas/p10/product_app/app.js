@@ -60,6 +60,53 @@ function buscarID(e) {
     client.send("id="+id);
 }
 
+function buscarProducto(e) {
+    e.preventDefault();
+    
+    var texto = document.getElementById('search').value.trim();
+    if (texto === "") {
+        alert("Por favor, escribe algo para buscar.");
+        return;
+    }
+    var client = getXMLHttpRequest();
+    client.open('POST', './backend/read.php', true);
+    client.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    client.onreadystatechange = function () {
+        if (client.readyState == 4 && client.status == 200) {
+            console.log('[CLIENTE]\n' + client.responseText);
+
+            let productos = JSON.parse(client.responseText);
+
+            let template = "";
+            if (productos.length > 0) {
+                for (let i = 0; i < productos.length; i++) {
+                    let p = productos[i];
+                    let descripcion = `
+                        <li>precio: ${p.precio}</li>
+                        <li>unidades: ${p.unidades}</li>
+                        <li>modelo: ${p.modelo}</li>
+                        <li>marca: ${p.marca}</li>
+                        <li>detalles: ${p.detalles}</li>
+                    `;
+                    template += `
+                        <tr>
+                            <td>${p.id}</td>
+                            <td>${p.nombre}</td>
+                            <td><ul>${descripcion}</ul></td>
+                        </tr>
+                    `;
+                }
+            } else {
+                template = '<tr><td colspan="3">No se encontraron productos.</td></tr>';
+            }
+
+            document.getElementById("productos").innerHTML = template;
+        }
+    };
+    client.send("buscar=" + encodeURIComponent(texto));
+}
+
+
 // FUNCIÓN CALLBACK DE BOTÓN "Agregar Producto"
 function agregarProducto(e) {
     e.preventDefault();
