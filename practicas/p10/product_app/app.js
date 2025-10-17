@@ -5,7 +5,7 @@ var baseJSON = {
     "modelo": "XX-000",
     "marca": "NA",
     "detalles": "NA",
-    "imagen": "img/default.png"
+    "imagen": "img/vacio.png"
   };
 
 // FUNCIÓN CALLBACK DE BOTÓN "Buscar"
@@ -117,6 +117,57 @@ function agregarProducto(e) {
     var finalJSON = JSON.parse(productoJsonString);
     // SE AGREGA AL JSON EL NOMBRE DEL PRODUCTO
     finalJSON['nombre'] = document.getElementById('name').value;
+
+    if(!finalJSON.nombre || finalJSON.nombre.length > 100){
+        alert("Nombre vació o con longitus superior a 100 caracteres.");
+        return;
+    }
+    if(finalJSON.precio < 100 || !finalJSON.precio){
+        alert("El precio es obligatorio y su mínimo es de $100.");
+        return;
+    }
+    if(finalJSON.unidades < 0 || !finalJSON.unidades){
+        alert("Las unidades son obligatorias y deben ser al menos 0.");
+        return;
+    }
+    if(!finalJSON.modelo || finalJSON.modelo ==="XX-000"){
+        alert("Modelo obligatorio");
+        return;
+    }
+    if(!finalJSON.marca || finalJSON.marca === "NA"){
+        alert("Marca obligatoria");
+        return;
+    }  else {
+        let marcasValidas = [
+            "Samsung",
+            "HP",
+            "Asus",
+            "Hisense",
+            "Sony",
+            "Xbox",
+            "Apple",
+            "Logitech"
+        ]
+        if (!marcasValidas.includes(finalJSON.marca)) {
+            alert("Marca no encontrada. Posibles marcas: Samsung, HP, Asus, Hisense, Sony, Xbox, Apple, Logitech.");
+            return;
+        }
+    }
+
+    if(finalJSON.detalles !== "NA" && finalJSON.detalles !== ""){
+        if(finalJSON.detalles.length > 250){
+            alert("Los detalles no deben ser más de 250 caracteres.");
+            return;
+        }
+    }
+    else {
+        finalJSON.detalles === "";
+    }
+    if(finalJSON.imagen === ""){
+        finalJSON.imagen = "img/vacio.png";
+    }
+
+
     // SE OBTIENE EL STRING DEL JSON FINAL
     productoJsonString = JSON.stringify(finalJSON,null,2);
 
@@ -127,6 +178,7 @@ function agregarProducto(e) {
     client.onreadystatechange = function () {
         // SE VERIFICA SI LA RESPUESTA ESTÁ LISTA Y FUE SATISFACTORIA
         if (client.readyState == 4 && client.status == 200) {
+            alert(client.responseText);
             console.log(client.responseText);
         }
     };
