@@ -27,7 +27,7 @@ $(function(){
     console.log('JQuery funcionando')
     listarProductos();
     let ocultarLista = false;
-   
+    var edit = false;
     function listarProductos(){
         $.ajax({
             url: './backend/product-search.php',
@@ -47,7 +47,9 @@ $(function(){
                     template += `
                         <tr productId="${producto.id}">
                             <td>${producto.id}</td>
-                            <td>${producto.nombre}</td>
+                            <td>
+                                <a href="#" class="product-item">${producto.nombre}</a>
+                            </td>
                             <td><ul>${descripcion}</ul></td>
                             <td>
                                 <button class="product-delete btn btn-danger" onclick="eliminarProducto()">
@@ -95,7 +97,7 @@ $(function(){
                     template += `
                         <tr productId="${producto.id}">
                             <td>${producto.id}</td>
-                            <td>${producto.nombre}</td>
+                            <td><a href="#" class="product-item">${producto.nombre}</a></td>
                             <td><ul>${descripcion}</ul></td>
                             <td>
                                 <button class="product-delete btn btn-danger">
@@ -188,28 +190,13 @@ $(function(){
 
         listarProductos();
         var postDataJSON = JSON.stringify(finalJSON,null,2);
-        let url = './backend/product-add.php';
-
-
-        $.post(url, postDataJSON, function (response){
-            $('#product-form').trigger('reset');
-            init();
-            console.log(response);
-            let respuesta = JSON.parse(response);
-            let template_bar = '';
-            template_bar += `
-                <li style="list-style: none;">status: ${respuesta.status}</li>
-                <li style="list-style: none;">message: ${respuesta.message}</li>
-            `;
-            $('#product-result').removeClass("d-none").addClass("d-block");
-            $('#container').html(template_bar);
-            listarProductos();
-        })
+        let url = edit === false ? './backend/product-add.php' : './backend/product-edit.php';
         
         $.ajax({
             url: url,
             type: "POST",
-            data: finalJSON,
+            data: JSON.stringify(finalJSON),
+            contentType: "application/json",
             success: function(response) {
                 $('#product-form').trigger('reset');
                 init(); 
@@ -248,6 +235,34 @@ $(function(){
             })
         }
     })
+    
 
+    $(document).on('click', '.product-item', function () {
+        if (confirm('¿Estás seguro de querer editar esto?')) {
+            let element = $(this)[0].parentElement.parentElement;
+            let id = $(element).attr('productId');
+
+            $.post('./backend/product-single.php', { id }, function (response) {
+                console.log(response);
+                const product = JSON.parse(response);
+                $('#name').val(product.name);
+                $('#productId').val(product.id);
+
+                const description = {
+                    "precio": product.precio,
+                    "unidades": product.unidades,
+                    "modelo": product.modelo,
+                    "marca": product.marca,
+                    "detalles": product.detalles,
+                    "imagen": product.imagen
+                };
+
+                $('#description').val(JSON.stringify(description, null, 2));
+                edit = true;
+
+                listarProductos();
+            })
+        }
+    })
 
 })
