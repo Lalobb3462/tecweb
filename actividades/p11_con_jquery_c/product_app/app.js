@@ -1,28 +1,11 @@
-// JSON BASE A MOSTRAR EN FORMULARIO
-/*
-$(function(){
-    console.log('JQuery Funcionando');
-});
-*/
-
 var baseJSON = {
     "precio": 0.0,
     "unidades": 1,
     "modelo": "XX-000",
     "marca": "NA",
-    "detalles": "NA",
+    "detalles": "",
     "imagen": "img/vacio.png"
-  };
-
-function init() {
-    /**
-     * Convierte el JSON a string para poder mostrarlo
-     * ver: https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/JSON
-     */
-    var JsonString = JSON.stringify(baseJSON,null,2);
-    document.getElementById("description").value = JsonString;
-}
-
+};
 $(function(){
     console.log('JQuery funcionando')
     listarProductos();
@@ -126,16 +109,55 @@ $(function(){
         }
     })
 
+    function validarCampo(campo, condicion, mensaje) {
+        if(condicion){
+            $(`#${campo}-status`).text(mensaje).removeClass("d-none");
+            $(`#${campo}`).addClass("is-invalid");
+            return false;
+        }
+        $(`#${campo}-status`).addClass("d-none");
+        $(`#${campo}`).removeClass("is-invalid").addClass("is-valid");
+        return true;
+    }
+
+    $('#name').on('blur', function(){
+        validarCampo('name', $(this).val().length === 0 || $(this).val().length > 100, "Nombre inválido.");
+    });
+
+    $('#precio').on('blur', function(){
+        validarCampo('precio', $(this).val() < 100, "El precio mínimo es $100.");
+    });
+
+    $('#unidades').on('blur', function(){
+        validarCampo('unidades', $(this).val() < 0, "Las unidades deben ser 0 o más.");
+    });
+
+    $('#modelo').on('blur', function(){
+        validarCampo('modelo', $(this).val() === "" || $(this).val() === "XX-000", "Modelo obligatorio.");
+    });
+
+    $('#marca').on('blur', function(){
+        validarCampo('marca', $(this).val() === "NA", "Selecciona una marca válida.");
+    });
+
+    $('#detalles').on('blur', function(){
+        validarCampo('detalles', $(this).val().length > 250, "No más de 250 caracteres.");
+    });
+
     $('#product-form').submit(function (e){
+        $('button.btn-primary').text("Agregar Producto");
         e.preventDefault();
-        const postData = {
-            name: $('#name').val(),
-            description: $('#description').val(),
-            id: $('#productId').val()
-        };
-        var finalJSON = JSON.parse(postData.description);
-        finalJSON['nombre'] = postData.name;
-        finalJSON['id'] = postData.id;
+
+        let finalJSON = { ...baseJSON };
+
+        finalJSON.nombre   = $('#name').val();
+        finalJSON.precio   = parseFloat($('#precio').val());
+        finalJSON.unidades = parseInt($('#unidades').val());
+        finalJSON.modelo   = $('#modelo').val();
+        finalJSON.marca    = $('#marca').val();
+        finalJSON.detalles = $('#detalles').val() || "";
+        finalJSON.imagen   = $('#imagen').val() || "img/vacio.png";
+        finalJSON.id       = $('#productId').val();
 
         let template_bar = '';
 
@@ -188,8 +210,6 @@ $(function(){
             return;
         }
 
-        listarProductos();
-        var postDataJSON = JSON.stringify(finalJSON,null,2);
         let url = edit === false ? './backend/product-add.php' : './backend/product-edit.php';
         
         $.ajax({
@@ -199,7 +219,7 @@ $(function(){
             contentType: "application/json",
             success: function(response) {
                 $('#product-form').trigger('reset');
-                init(); 
+                //init(); 
                 console.log(response);
                 let respuesta = JSON.parse(response);
                 let template_bar = `
@@ -208,6 +228,10 @@ $(function(){
                 `;
                 $('#product-result').removeClass("d-none").addClass("d-block");
                 $('#container').html(template_bar);
+
+                $('button.btn-primary').text("Agregar Producto");
+                edit = false;
+
                 listarProductos();
             }
         });
@@ -239,6 +263,7 @@ $(function(){
 
     $(document).on('click', '.product-item', function () {
         if (confirm('¿Estás seguro de querer editar esto?')) {
+            $('button.btn-primary').text("Modificar Producto");
             let element = $(this)[0].parentElement.parentElement;
             let id = $(element).attr('productId');
 
@@ -257,7 +282,12 @@ $(function(){
                     "imagen": product.imagen
                 };
 
-                $('#description').val(JSON.stringify(description, null, 2));
+                $('#precio').val(product.precio);
+                $('#unidades').val(product.unidades);
+                $('#modelo').val(product.modelo);
+                $('#marca').val(product.marca);
+                $('#detalles').val(product.detalles);
+                $('#imagen').val(product.imagen);
                 edit = true;
 
                 listarProductos();

@@ -8,7 +8,7 @@
     );
     if(!empty($producto)) {
         $jsonOBJ = json_decode($producto);
-        $sql = "SELECT * FROM productos WHERE nombre = '{$jsonOBJ->nombre}' AND eliminado = 0";
+        $sql = "SELECT * FROM productos WHERE nombre = '{$jsonOBJ->nombre}' AND id != '{$jsonOBJ->id}' AND eliminado = 0";
 	    $result = $conexion->query($sql);
         
         if ($result->num_rows == 0) {
