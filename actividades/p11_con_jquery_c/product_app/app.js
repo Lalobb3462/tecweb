@@ -11,6 +11,7 @@ $(function(){
     listarProductos();
     let ocultarLista = false;
     var edit = false;
+    let nombreRepetido = false;
     function listarProductos(){
         $.ajax({
             url: './backend/product-search.php',
@@ -109,6 +110,34 @@ $(function(){
         }
     })
 
+    $('#name').keyup(function(){
+        let name = $('#name').val().trim();
+        if(name.length === 0){
+            nombreRepetido = false;
+            $('#name').removeClass("is-valid is-invalid");
+            $('#name-status').addClass("d-none").text('');
+            return;
+        }
+        $.ajax({
+            url: './backend/product-name.php',
+            type: 'POST',
+            data: { name },
+            success: function (response) {
+                let respuesta = JSON.parse(response);
+                if(respuesta.status == "success") {
+                    nombreRepetido = false;
+                    $('#name-status').removeClass("d-none text-danger").addClass("text-success").text(respuesta.message);
+                    $('#name').removeClass("is-invalid").addClass("is-valid");
+                }
+                else{
+                    nombreRepetido = true;
+                    $('#name-status').removeClass("d-none text-success").addClass("text-danger").text(respuesta.message);
+                    $('#name').removeClass("is-valid").addClass("is-invalid");
+                }
+            }
+        })
+    })
+
     function validarCampo(campo, condicion, mensaje) {
         if(condicion){
             $(`#${campo}-status`).text(mensaje).removeClass("d-none");
@@ -120,16 +149,26 @@ $(function(){
         return true;
     }
 
-    $('#name').on('blur', function(){
-        validarCampo('name', $(this).val().length === 0 || $(this).val().length > 100, "Nombre inválido.");
-    });
+$('#name').on('blur', function(){
+    let valor = $(this).val().trim();
+
+    validarCampo(
+        'name',
+        valor.length === 0 || valor.length > 100 || nombreRepetido === true,
+        valor.length === 0 || valor.length > 100
+            ? "Nombre inválido (vacío o mayor a 100 caracteres)."
+            : "Nombre ya registrado."
+    );
+});
 
     $('#precio').on('blur', function(){
         validarCampo('precio', $(this).val() < 100, "El precio mínimo es $100.");
     });
 
     $('#unidades').on('blur', function(){
-        validarCampo('unidades', $(this).val() < 0, "Las unidades deben ser 0 o más.");
+        let valor = $(this).val().trim();
+        validarCampo('unidades', valor === "" || parseInt(valor) < 0, "Las unidades deben ser un número y ser 0 o más."
+        );
     });
 
     $('#modelo').on('blur', function(){
@@ -207,6 +246,15 @@ $(function(){
             $('#product-result').show();
             $('#container').html('<ul>' + template_bar + '</ul>');
             ocultarCuadro = true;
+            return;
+        }
+
+        if(nombreRepetido === true){
+            $('#name').addClass("is-invalid");
+            $('#name-status')
+                .removeClass("d-none text-success")
+                .addClass("text-danger")
+                .text("El nombre del producto ya existe.");
             return;
         }
 
