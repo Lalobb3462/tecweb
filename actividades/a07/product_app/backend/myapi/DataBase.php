@@ -5,7 +5,7 @@ abstract class DataBase {
     public function __construct($user, $pass, $db){
         $this->conexion = @mysqli_connect('localhost', $user, $pass, $db); 
         if(!$this->conexion){
-            die('LaBase de datos no ha sido conectada');
+            die('La Base de datos no ha sido conectada');
         }
     }
 }

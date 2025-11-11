@@ -4,7 +4,7 @@ namespace tecweb\myapi;
 use tecweb\myapi\DataBase as DataBase;
 require_once __DIR__.'/DataBase.php';
 
-class Product extends DataBase{
+class Products extends DataBase{
     private $data = NULL;
     public function __construct($db, $user='root', $pass='Youtube1'){
             $this->data = array();
@@ -37,8 +37,9 @@ class Product extends DataBase{
             } else {
             $this->data['message'] = "ERROR: No se ejecuto $sql. " . mysqli_error($this->conexion);
             }
-            $this->conexion->close();
+            
         }
+        $this->conexion->close();
     }
 
     public function edit($obj){
@@ -57,9 +58,8 @@ class Product extends DataBase{
                     $this->data['message'] = "ERROR: No se ejecuto $sql. " . mysqli_error($this->conexion);
                 }
             }
-            $this->conexion->close();
         }
-
+        $this->conexion->close();
     }
 
     public function list(){
@@ -86,20 +86,19 @@ class Product extends DataBase{
             if ($result = $this->conexion->query($sql) ) {
 			$rows = $result->fetch_all(MYSQLI_ASSOC);
 
-            if(!is_null($rows)) {
-                foreach($rows as $num => $row) {
-                    foreach($row as $key => $value) {
-                        $this->data[$num][$key] = utf8_encode($value);
+                if(!is_null($rows)) {
+                    foreach($rows as $num => $row) {
+                        foreach($row as $key => $value) {
+                            $this->data[$num][$key] = utf8_encode($value);
+                        }
                     }
                 }
+			    $result->free();
+            } else {
+                die('Query Error: '.mysqli_error($this->conexion));
             }
-			$result->free();
-		} else {
-            die('Query Error: '.mysqli_error($this->conexion));
         }
-		$this->conexion->close();
-        }
-        
+        $this->conexion->close();
     }
 
     public function single($id){
@@ -117,29 +116,28 @@ class Product extends DataBase{
             } else{
                 die('Query Error: '.mysqli_error($this->conexion));
             }
-            $this->conexion->close();
         }
+        $this->conexion->close();
     }
 
     public function singleByName($nombre){
         $this->data = array();
         if(isset($nombre)){
-            $sql = "SELECT * FROM productos WHERE (nombre LIKE '%{$nombre}%' AND eliminado = 0)";
+            $sql = "SELECT * FROM productos WHERE nombre = '{$nombre}' AND eliminado = 0";
             if($result = $this->conexion->query($sql)){
                 $rows = $result->fetch_all(MYSQLI_ASSOC);
-                if(!is_null($rows)){
-                foreach($rows as $num => $row){
-                    foreach($row as $key => $value){
-                        $this->data[$num][$key] = utf8_encode($value);
-                    }
+
+                if(count($rows) > 0){
+                    $this->data = ['status' => 'error', 'message' => 'Ya existe un producto con ese nombre.'];
+                } else {
+                    $this->data = ['status' => 'success', 'message' => 'Producto disponible para agregar/modificar.'];
                 }
-            }
-            $result->free();
+                $result->free();
             } else {
-                die('Query Error: '.mysqli_error($this->conexion));
+                $this->data = ['status' => 'error', 'message' => 'Error en la consulta: '.mysqli_error($this->conexion)];
             }
-            $this->conexion->close();
         }
+        $this->conexion->close();
     }
 
     public function getData(){
