@@ -36,7 +36,7 @@ $(function(){
                             </td>
                             <td><ul>${descripcion}</ul></td>
                             <td>
-                                <button class="product-delete btn btn-danger" onclick="eliminarProducto()">
+                                <button class="product-delete btn btn-danger">
                                     Eliminar
                                 </button>
                             </td>

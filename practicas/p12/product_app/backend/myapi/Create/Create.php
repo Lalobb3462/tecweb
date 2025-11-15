@@ -1,6 +1,6 @@
 <?php 
-namespace tecweb\myapi\Create;
-use tecweb\myapi\DataBase as DataBase;
+namespace TecWeb\MyApi\Create;
+use TecWeb\MyApi\DataBase as DataBase;
 require_once __DIR__. '/../DataBase.php';
 
 class Create extends DataBase{

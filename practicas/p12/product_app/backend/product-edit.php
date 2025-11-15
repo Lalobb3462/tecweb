@@ -1,6 +1,6 @@
 <?php
-    use tecweb\myapi\update\Update as Update;
-    require_once __DIR__.'/myapi/Update/Update.php';
+    require_once __DIR__.'/../vendor/autoload.php';
+    use TecWeb\MyApi\Update\Update as Update;
 
     $json = json_decode(file_get_contents("php://input"), true);
     $prodObj = new Update('marketzone');
