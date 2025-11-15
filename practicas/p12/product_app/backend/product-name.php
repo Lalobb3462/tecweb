@@ -1,8 +1,8 @@
 <?php
-    use tecweb\myapi\Products as Products;
-    require_once __DIR__.'/myapi/Products.php';
+    use tecweb\myapi\read\Read as Read;
+    require_once __DIR__.'/myapi/Read/Read.php';
     
-    $prodObj = new Products('marketzone');
+    $prodObj = new Read('marketzone');
     $prodObj->singleByName($_POST['name']);
     echo $prodObj->getData();
  ?>
